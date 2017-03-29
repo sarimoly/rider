@@ -3,6 +3,8 @@ using System.Collections;
 
 public class BattleScene : SceneBase {
     public GameObject m_Player;
+    public GameObject m_OperateWindow;
+    public AvatarController m_PlayerController;
 
     void Awake()
     {
@@ -11,8 +13,14 @@ public class BattleScene : SceneBase {
             GameObject obj = objs[0] as GameObject;
             m_Player = Instantiate(obj,Vector3.zero, Quaternion.Euler(new Vector3(0, 90, 0))) as GameObject;
             m_Player.tag = "Player";
+            m_PlayerController = m_Player.AddComponent<AvatarController>();
 
-            UIManager.Instance.CreateWindowAsync("Operate", 1, null);
+            UIManager.Instance.CreateWindowAsync("Operate", 1, window =>
+            {
+                m_OperateWindow = window;
+            });
+
+
         });
     }
 

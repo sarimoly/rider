@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance = null;
     private Transform parent;
 
+    public int m_Direction = 0;
+
     Transform Parent
     {
         get
