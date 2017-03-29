@@ -2,18 +2,18 @@
 using System.Collections;
 
 public class BattleScene : SceneBase {
-    public GameObject m_Player;
+    public GameObject player;
     public GameObject m_OperateWindow;
-    public AvatarController m_PlayerController;
+    public AvatarController playerController;
 
     void Awake()
     {
         ResourceManager.Instance.LoadPrefab("models", "elsword_fight", objs =>
         {
             GameObject obj = objs[0] as GameObject;
-            m_Player = Instantiate(obj,Vector3.zero, Quaternion.Euler(new Vector3(0, 90, 0))) as GameObject;
-            m_Player.tag = "Player";
-            m_PlayerController = m_Player.AddComponent<AvatarController>();
+            player = Instantiate(obj,Vector3.zero, Quaternion.Euler(new Vector3(0, 90, 0))) as GameObject;
+            player.tag = "Player";
+            playerController = player.AddComponent<AvatarController>();
 
             UIManager.Instance.CreateWindowAsync("Operate", 1, window =>
             {
@@ -31,6 +31,9 @@ public class BattleScene : SceneBase {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    if (playerController && playerController.IsAlive())
+        {
+            playerController.Run();
+        }
 	}
 }
