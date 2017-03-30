@@ -14,6 +14,7 @@ public class BattleScene : SceneBase {
             player = Instantiate(obj,Vector3.zero, Quaternion.Euler(new Vector3(0, 90, 0))) as GameObject;
             player.tag = "Player";
             playerController = player.AddComponent<AvatarController>();
+            Camera.main.gameObject.AddComponent<CameraHorizontalFollow>();
 
             UIManager.Instance.CreateWindowAsync("Operate", 1, window =>
             {
